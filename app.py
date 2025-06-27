@@ -1,22 +1,17 @@
 import streamlit as st
 from summarizer import TextSummarizer
 
-st.set_page_config(page_title="Text Summarizer", layout="centered")
+st.title("🧠 Text Summarization Tool")
 
-st.title("📝 Text Summarization Tool")
-
-text = st.text_area("Enter text to summarize:", height=300)
-method = st.selectbox("Choose summarization method", ["both", "extractive", "abstractive"])
+sample_text = st.text_area("Enter text to summarize")
 
 if st.button("Summarize"):
     summarizer = TextSummarizer()
-    result = summarizer.summarize(text, method=method)
-
-    if "extractive" in result:
-        st.subheader("Extractive Summary")
-        st.write(result["extractive"])
+    result = summarizer.summarize(sample_text, method="both")
     
-    if "abstractive" in result:
-        st.subheader("Abstractive Summary")
-        st.write(result["abstractive"])
+    st.subheader("📄 Extractive Summary")
+    st.write(result["extractive"])
+    
+    st.subheader("🧠 Abstractive Summary")
+    st.write(result["abstractive"])
 
